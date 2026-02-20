@@ -36,17 +36,25 @@ header h1 { margin-bottom: 0.35rem; }
   margin: 1rem 0;
 }
 
+.card.mini h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+}
+
 label { font-weight: 600; display: block; margin-bottom: 0.5rem; }
 
-textarea {
+textarea,
+input[type='text'],
+input[type='password'] {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 0.85rem;
+  padding: 0.75rem;
   font: inherit;
-  resize: vertical;
   line-height: 1.4;
 }
+
+textarea { resize: vertical; }
 
 .actions {
   display: flex;
@@ -76,8 +84,42 @@ button.ghost {
   border: 1px solid var(--primary);
 }
 
+.ai-box {
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin-top: 0.85rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.inline-control {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.helper {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .disclaimer p { margin: 0.35rem 0 0; color: var(--muted); }
 .hidden { display: none; }
+
+.mapping-tree,
+.subclause-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.subclause-list {
+  padding: 0.65rem 0.65rem 0.75rem;
+}
 
 .mapping-row {
   border: 1px solid var(--border);
@@ -86,12 +128,27 @@ button.ghost {
   overflow: hidden;
 }
 
+.mapping-row.depth-1,
+.mapping-row.depth-2,
+.mapping-row.depth-3 {
+  margin-left: 1rem;
+}
+
 .mapping-head {
   background: #eef3ff;
   color: #0f2f9f;
   font-size: 0.9rem;
   font-weight: 700;
   padding: 0.45rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mode {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: #3152be;
 }
 
 .mapping-body {
@@ -108,15 +165,22 @@ button.ghost {
   border-left: 1px solid var(--border);
 }
 
-.mapping-col h3 {
+.mapping-col h3,
+.mapping-col h4 {
   margin: 0 0 0.45rem;
-  font-size: 0.95rem;
 }
 
 .mapping-col p {
-  margin: 0;
+  margin: 0 0 0.45rem;
   line-height: 1.45;
 }
+
+.references {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.references.muted { color: var(--muted); }
 
 .risk-item {
   border: 1px solid var(--border);

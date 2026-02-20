@@ -1,12 +1,13 @@
 {
   "name": "plain-terms-desktop",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Desktop MVP for Terms-of-Service simplification and risk analysis.",
   "main": "main.js",
   "author": "",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
+    "build-manifest": "node scripts/build-corpus-manifest.mjs",
     "pack-win": "electron-builder --win portable",
     "pack-all": "electron-builder -mwl"
   },
@@ -21,9 +22,11 @@
       "index.html",
       "styles.css",
       "app.js",
+      "translator.js",
       "main.js",
       "README.md",
-      "package.json"
+      "package.json",
+      "data/**/*"
     ],
     "directories": {
       "output": "dist"
