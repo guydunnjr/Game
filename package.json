@@ -1,0 +1,32 @@
+{
+  "name": "plain-terms-desktop",
+  "version": "0.2.0",
+  "description": "Desktop MVP for Terms-of-Service simplification and risk analysis.",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack-win": "electron-builder --win portable",
+    "pack-all": "electron-builder -mwl"
+  },
+  "devDependencies": {
+    "electron": "^31.2.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.plainterms.desktop",
+    "productName": "Plain Terms",
+    "files": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "main.js",
+      "README.md",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  }
+}
