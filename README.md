@@ -33,6 +33,18 @@ node scripts/build-corpus-manifest.mjs
 
 The app will show how many integrated reference docs were loaded.
 
+
+## Automatic manifest refresh on app open
+
+When the desktop app opens, it now checks the corpus folder and compares:
+
+- number of `.txt` files,
+- total bytes,
+- latest file modified time.
+
+If nothing changed since last run, it **skips rebuilding** to avoid unnecessary rescans.
+If anything changed, it rebuilds `data/reference_corpus/manifest.json` automatically.
+
 ## Local browser run (quickest)
 
 ```bash
@@ -54,10 +66,16 @@ Open <http://localhost:4173>.
 npm install
 ```
 
-### 3) Build reference manifest (recommended)
+### 3) Build reference manifest (optional manual run)
 
 ```bash
 npm run build-manifest
+```
+
+If Bash gives you trouble on Windows, run the same script from Command Prompt:
+
+```cmd
+node scripts\build-corpus-manifest.mjs
 ```
 
 ### 4) Launch desktop app locally

@@ -1,5 +1,10 @@
 {
-  "generatedAt": "2026-02-20T19:11:46.140Z",
+  "generatedAt": "2026-02-20T20:12:34.603Z",
   "count": 0,
+  "stats": {
+    "fileCount": 0,
+    "totalBytes": 0,
+    "lastModifiedMs": 0
+  },
   "docs": []
 }
