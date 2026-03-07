@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plain Terms — ToS Simplifier</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Plain Terms</h1>
+        <p class="subtitle">Paste legal text. Get plain-English explanations (3rd-grade default), risk highlights, and citations.</p>
+      </header>
+
+      <section class="card disclaimer">
+        <strong>Legal disclaimer:</strong>
+        <p>This tool is for educational purposes only and does not provide legal advice.</p>
+      </section>
+
+      
+
+      <section class="card">
+        <label for="tosInput">Terms of Service text</label>
+        <textarea id="tosInput" rows="12" placeholder="Paste Terms of Service or policy text here..."></textarea>
+
+        <div class="ai-box">
+          <label class="inline-control">
+            <input id="aiToggle" type="checkbox" />
+            Use AI tie-in translator (optional)
+          </label>
+          <input id="aiEndpoint" type="text" placeholder="AI endpoint URL (optional)" />
+          <input id="aiApiKey" type="password" placeholder="API key (optional)" />
+          <p class="helper">If AI is off or unavailable, the app uses the local lexicon translator for speed.</p>
+        </div>
+
+        <div class="actions">
+          <button id="analyzeBtn">Analyze text</button>
+          <button id="exportBtn" disabled>Export simplified report</button>
+          <button id="loadSampleBtn" class="ghost">Load sample text</button>
+        </div>
+      </section>
+
+      <section id="results" class="results hidden">
+        <article class="card">
+          <h2>Source ↔ Plain-English mapping</h2>
+          <p>Parent clauses and sub-clauses are shown in nested bullets with explanations.</p>
+          <div id="mappingList"></div>
+        </article>
+
+        <article class="card">
+          <h2>Potentially disadvantageous clauses</h2>
+          <div id="riskList"></div>
+        </article>
+
+        <article class="card disclaimer">
+          <strong>Legal disclaimer:</strong>
+          <p>This tool is for educational purposes only and does not provide legal advice.</p>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

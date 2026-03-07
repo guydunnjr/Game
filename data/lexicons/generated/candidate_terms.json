@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-03-07T00:02:29.765Z",
+  "sourceDocCount": 0,
+  "instructions": [
+    "Feed top terms/phrases into your AI process to propose legalese->grade3 mappings.",
+    "Review outputs manually before merging into data/lexicons/legalese_to_grade3.json."
+  ],
+  "topSingleTerms": [],
+  "topPhrases": []
+}

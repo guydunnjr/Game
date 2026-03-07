@@ -1,0 +1,11 @@
+{
+  "preferredWords": [
+    "you", "we", "use", "share", "pay", "money", "rule", "time", "month", "year",
+    "stop", "end", "risk", "data", "name", "email", "safe", "help", "choice", "change",
+    "must", "can", "cannot", "need", "before", "after", "right", "ask", "tell", "agree"
+  ],
+  "plainSentenceStarters": [
+    "This part says", "You should know", "The company says", "If this happens", "This means"
+  ],
+  "sourceNote": "Starter plain-language list for elementary readability tuning."
+}
