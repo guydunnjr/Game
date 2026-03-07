@@ -1,11 +1,10 @@
-# Reference Corpus Folder
+# Reference Corpus Folder (Offline Use)
 
 Place your Terms of Service `.txt` files in `data/reference_corpus/files/`.
 
-Then run:
+In this version, corpus files are **not** loaded or scanned by the app at startup.
+They are used only for offline lexicon candidate generation:
 
 ```bash
-node scripts/build-corpus-manifest.mjs
+npm run build-lexicon-candidates
 ```
-
-This creates `data/reference_corpus/manifest.json`, which the app reads to show integrated reference coverage.

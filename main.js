@@ -1,16 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-async function ensureCorpusManifestOnOpen() {
-  try {
-    const { ensureManifestFresh } = await import(path.join(__dirname, 'scripts/corpus-manifest.mjs'));
-    const result = await ensureManifestFresh();
-    console.log(`[Plain Terms] ${result.reason}`);
-  } catch (error) {
-    console.warn('[Plain Terms] Could not refresh corpus manifest on startup:', error.message);
-  }
-}
-
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1280,
@@ -27,8 +17,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 }
 
-app.whenReady().then(async () => {
-  await ensureCorpusManifestOnOpen();
+app.whenReady().then(() => {
   createWindow();
 
   app.on('activate', () => {

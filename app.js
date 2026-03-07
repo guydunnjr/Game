@@ -7,14 +7,12 @@ const tosInput = document.getElementById('tosInput');
 const results = document.getElementById('results');
 const mappingList = document.getElementById('mappingList');
 const riskList = document.getElementById('riskList');
-const corpusStats = document.getElementById('corpusStats');
 const aiToggle = document.getElementById('aiToggle');
 const aiEndpoint = document.getElementById('aiEndpoint');
 const aiApiKey = document.getElementById('aiApiKey');
 
 let currentReport = null;
 let translator;
-let corpusManifest = { count: 0, docs: [] };
 
 const riskRules = [
   { key: 'Auto-renewal', level: 'high', re: /auto(?:matic)?\s*renew|renew\s+on\s+its\s+own/i, why: 'You may keep getting charged unless you cancel on time.' },
@@ -116,23 +114,6 @@ function attachHierarchy(mappings) {
   return roots;
 }
 
-function findReferenceMatches(clauseText) {
-  if (!corpusManifest.docs?.length) return [];
-  const words = clauseText.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 5);
-  if (words.length === 0) return [];
-
-  const uniq = [...new Set(words)].slice(0, 8);
-  return corpusManifest.docs
-    .map((doc) => {
-      const hay = `${doc.title} ${doc.excerpt}`.toLowerCase();
-      const score = uniq.reduce((total, word) => total + (hay.includes(word) ? 1 : 0), 0);
-      return { ...doc, score };
-    })
-    .filter((doc) => doc.score > 1)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 2);
-}
-
 async function analyzeText(inputText) {
   const clauses = splitClauses(inputText);
   const mappings = [];
@@ -145,8 +126,7 @@ async function analyzeText(inputText) {
       level: clause.level,
       simplified: simplified.simplified,
       bulletExplanations: simplified.bulletExplanations,
-      translationMode: simplified.mode,
-      referenceMatches: findReferenceMatches(clause.text)
+      translationMode: simplified.mode
     });
   }
 
@@ -168,9 +148,6 @@ function renderBullets(items) {
 function renderTree(nodes, depth = 0) {
   return nodes.map((mapping) => {
     const indentClass = `depth-${Math.min(depth, 3)}`;
-    const refs = mapping.referenceMatches?.length
-      ? `<p class="references">Reference matches: ${mapping.referenceMatches.map((r) => escapeHtml(r.title)).join(', ')}</p>`
-      : '<p class="references muted">Reference matches: none</p>';
 
     const children = mapping.children?.length
       ? `<ul class="subclause-list">${renderTree(mapping.children, depth + 1)}</ul>`
@@ -189,7 +166,6 @@ function renderTree(nodes, depth = 0) {
             <p>${escapeHtml(mapping.simplified)}</p>
             <h4>Bullet explanation</h4>
             <ul>${renderBullets(mapping.bulletExplanations)}</ul>
-            ${refs}
           </section>
         </div>
         ${children}
@@ -269,19 +245,6 @@ function exportReport(report) {
   URL.revokeObjectURL(url);
 }
 
-async function loadCorpusManifest() {
-  try {
-    const response = await fetch('data/reference_corpus/manifest.json');
-    if (response.ok) {
-      corpusManifest = await response.json();
-    }
-  } catch (_err) {
-    corpusManifest = { count: 0, docs: [] };
-  }
-
-  corpusStats.textContent = `${corpusManifest.count || 0} integrated reference document(s) loaded.`;
-}
-
 analyzeBtn.addEventListener('click', async () => {
   const inputText = tosInput.value.trim();
   if (!inputText) {
@@ -311,5 +274,4 @@ loadSampleBtn.addEventListener('click', () => {
 
 (async function init() {
   translator = await createTranslator();
-  await loadCorpusManifest();
 })();
