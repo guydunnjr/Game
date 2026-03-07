@@ -45,6 +45,27 @@ When the desktop app opens, it now checks the corpus folder and compares:
 If nothing changed since last run, it **skips rebuilding** to avoid unnecessary rescans.
 If anything changed, it rebuilds `data/reference_corpus/manifest.json` automatically.
 
+
+## Where to put your corpus so I can use it
+
+Put your corpus files here:
+
+- `data/reference_corpus/files/`
+
+You can keep nested folders. Just make sure each document is a `.txt` file.
+
+After placing files, run:
+
+```bash
+npm run build-manifest
+npm run build-lexicon-candidates
+```
+
+This writes:
+
+- `data/reference_corpus/manifest.json` (corpus index)
+- `data/lexicons/generated/candidate_terms.json` (AI-ready legal term candidates)
+
 ## Local browser run (quickest)
 
 ```bash
@@ -91,6 +112,17 @@ npm run pack-win
 ```
 
 Then open the generated app in `dist/`.
+
+
+## AI lexicon workflow for your 90% target
+
+To keep startup fast, do **not** preload all corpus text into the app UI. Instead:
+
+1. Keep corpus files on disk in `data/reference_corpus/files/`.
+2. Build candidate terms with `npm run build-lexicon-candidates`.
+3. Use your AI process to convert top legal phrases into plain grade-3 terms.
+4. Review and merge accepted mappings into `data/lexicons/legalese_to_grade3.json`.
+5. Re-test against your benchmark set and track accuracy.
 
 ## Does this improve efficiency?
 

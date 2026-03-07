@@ -9,7 +9,8 @@
     "start": "electron .",
     "build-manifest": "node scripts/build-corpus-manifest.mjs",
     "pack-win": "electron-builder --win portable",
-    "pack-all": "electron-builder -mwl"
+    "pack-all": "electron-builder -mwl",
+    "build-lexicon-candidates": "node scripts/build-lexicon-candidates.mjs"
   },
   "devDependencies": {
     "electron": "^31.2.1",
